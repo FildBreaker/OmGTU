@@ -4,14 +4,16 @@ for i in range(1, 11):
 
     data = []
 
-    with open(input_filename, "rt") as f:
-        n = int(f.readline())
+    with open(input_filename, "rt") as input_file:
+        n = int(input_file.readline())
 
         min_price = float("inf")
         firm = 0
 
-        for i in range(n):
-            x1, y1, z1, x2, y2, z2, p1, p2 = [float(i) for i in f.readline().split()]
+        for j in range(n):
+            x1, y1, z1, x2, y2, z2, p1, p2 = [
+                float(value) for value in input_file.readline().split()
+            ]
 
             v1 = x1 * y1 * z1
             s1 = 2 * x1 * y1 + 2 * y1 * z1 + 2 * z1 * x1
@@ -23,9 +25,9 @@ for i in range(1, 11):
 
             if milk_price < min_price:
                 min_price = milk_price
-                firm = i + 1
+                firm = j + 1
 
     min_price = round(min_price * 1000, 2)
 
-    with open(output_filename, "w") as file:
-        file.write(f"{firm} {min_price}\n")
+    with open(output_filename, "w") as output_file:
+        output_file.write(f"{firm} {min_price}\n")
